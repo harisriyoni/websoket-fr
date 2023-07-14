@@ -7,32 +7,67 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-image: url('https://i2.wp.com/blog.tripcetera.com/id/wp-content/uploads/2020/10/Danau-Toba-edited.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
         }
 
-        h1 {
-            text-align: center;
+        .chat-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: calc(100vh - 100px); /* Mengatur tinggi kartu chat */
+            max-height: 600px; /* Batas maksimal tinggi kartu chat */
+            overflow-y: auto; /* Menambahkan scrollbar jika kontennya melebihi tinggi kartu */
+            padding: 20px;
         }
 
-        #messages {
-            margin-bottom: 10px;
+        .input-group {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
         }
 
-        button {
-            margin-left: 5px;
+        .input-group input[type="text"] {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px;
+        }
+
+        .input-group button {
+            background-color: #3B82F6;
+            color: #fff;
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body>
     <div class="container mx-auto py-8">
         <h1 class="text-3xl font-bold mb-4">WebSocket Chat</h1>
-        <div class="flex mb-4">
-            <input type="text" id="username" class="w-1/4 mr-2 p-2 border border-gray-300 rounded" placeholder="Username">
-            <input type="text" id="message" class="flex-1 mr-2 p-2 border border-gray-300 rounded" placeholder="Message">
-            <div class="input-group-append">
-                <button id="send" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">Send</button>
-            </div>
+        <div class="chat-card">
+            <div id="messages"></div>
         </div>
-        <div id="messages" class="border p-3 mb-3"></div>
+        <div class="input-group">
+            <input type="text" id="username" class="flex-1 mr-2 p-2 border border-gray-300 rounded" placeholder="Username">
+            <input type="text" id="message" class="flex-1 mr-2 p-2 border border-gray-300 rounded" placeholder="Message">
+            <button id="send">Send</button>
+        </div>
     </div>
 
     <script>
